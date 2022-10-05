@@ -3,7 +3,7 @@
 Goal: Show how one can develop BDD API tests with python 
 
 
-#### API tests: The tests on this project were developed in BDD style
+#### The tests on this project were developed in BDD style
 
 ## Run Tests:
 
