@@ -4,3 +4,4 @@ json
 pytest-bdd
 pytest-html
 pytest-xdist
+selenium
