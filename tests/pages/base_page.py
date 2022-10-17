@@ -2,7 +2,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-from utilities.settings import PROJECT_DIR, SCREENSHOT_PATH
+from utilities.settings import SCREENSHOT_PATH
+from selenium.webdriver.chrome.options import Options
+
+
+headless_options = Options()
+headless_options.add_argument("--headless")
 
 
 class WebBrowser:
@@ -18,10 +23,12 @@ class WebBrowser:
             return webdriver.Chrome()
         elif browser == 'Edge':
             return webdriver.Edge()
-        elif browser == 'Firefox':
-            return webdriver.Firefox()
+        elif browser == 'Headless Chrome':
+            return webdriver.Chrome(options=headless_options)
         elif browser == 'Opera':
-            return webdriver.Opera()
+            options = Options()
+            options.add_experimental_option("w3c", True)
+            return webdriver.Opera(options=options)
         else:
             raise Exception(f'Browser "{browser}" is not supported')
 

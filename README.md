@@ -9,6 +9,7 @@ Goal: Show how one can develop BDD API and Web tests with python
 
 All tests of this project can be runned by executing the bat file 'run_tests.bat'
 Each execution generates a html report inside 'reports' folder.
+Inside the batch file, one can define the browser where web tests will run setting the variable 'browser'
 
 Note: Don't forget to run the bat file inside an environment with all requirements (requirements.txt) installed
 
@@ -29,11 +30,33 @@ Note: Don't forget to run the bat file inside an environment with all requiremen
 
   This website represents a ToDO list where one can add, remove and mark as completed different tasks
 
-  At the moment, only Chrome is supported!
+  Supported Browsers:
+  - Chrome (tested on version: 106.0.5249.119; Webdriver:  106.0.5249.61
+  - Edge (tested on version: 106.0.1370.47; Webdriver:  106.0.1370.42)
+  - Opera (tested on version: 91.0.4516.77; Webdriver:  0.31.0)
+  - Headless Chrome
   
   Implemented tests:
   - Add New Task Successfully
 
+**Note:**
+
+  When running tests on a specific browser, if one have the following error: 
+      
+    AttributeError: 'dict' object has no attribute 'send_keys'
+
+  Should add the following code:
+
+  ```python
+  from selenium import webdriver
+  from selenium.webdriver.chrome.options import Options
+  
+  options = Options()
+  options.add_experimental_option("w3c", True)
+  # should add w3c option to the browser where get the error
+  # example with Opera:
+  driver = webdriver.Opera(options=options)
+  ```
     
 ## Final considerations:
 
@@ -45,3 +68,7 @@ Note: Don't forget to run the bat file inside an environment with all requiremen
 - To run the same test with different data, scenario outline is the best option;
 
 Hope you enjoyed!
+
+  
+
+

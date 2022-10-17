@@ -1,6 +1,4 @@
-import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
-from tests.pages.todo_list_page import ToDOList
 
 
 scenarios('../features/add_task.feature')

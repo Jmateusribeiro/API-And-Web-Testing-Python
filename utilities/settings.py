@@ -10,3 +10,5 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 SCREENSHOT_PATH=f'{PROJECT_DIR}//reports//evidences//'
 
 os.makedirs(SCREENSHOT_PATH, exist_ok=True)
+
+supported_browsers = ['Headless Chrome', 'Edge', 'Chrome', 'Opera']
