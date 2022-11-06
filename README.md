@@ -1,6 +1,6 @@
 # API and Web Testing With Python
 
-Goal: Show how one can develop BDD API and Web tests (selenium) with python (pytest)
+Goal: Show how one can develop BDD API and Web (selenium) tests with python (pytest)
 
 
 #### The tests on this project were developed in BDD style
