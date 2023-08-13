@@ -26,7 +26,7 @@ def registration(payload):
     url = HOST + REGISTRATION_ENDPOINT
     body = payload
 
-    response = requests.post(url, data=body)
+    response = requests.post(url, data=body, verify=False)
     return response
 
 

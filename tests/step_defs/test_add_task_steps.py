@@ -1,8 +1,6 @@
 from pytest_bdd import scenarios, given, when, then, parsers
 
-
 scenarios('../features/add_task.feature')
-
 
 # Given Step
 @given('todo list page is open')
