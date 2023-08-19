@@ -67,6 +67,9 @@ Note: Don't forget to run the bat file inside an environment with all requiremen
 - BDD test development make tests more readable;
 - To run the same test with different data, scenario outline is the best option;
 
+  The .env file is committed because this project is only to demonstration purposes.
+  In real projects the .env file, containing critical info, must be add to .gitignore
+
 Hope you enjoyed!
 
   

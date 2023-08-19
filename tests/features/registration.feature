@@ -5,13 +5,13 @@ Feature: Registration
     Given email and password are definied as <email> and <password>
     When registration is executed
     Then registration is completed
-    And the correct <token> is returned
+    And the correct token is returned
 
     Examples:
-      | email                      | password | token             |
-      | eve.holt@reqres.in         | xpto     | QpwL5tke4Pnpja7X4 |
-      | michael.lawson@reqres.in   | xpto     | QpwL5tke4Pnpja7X7 |
-      | lindsay.ferguson@reqres.in | xpto     | QpwL5tke4Pnpja7X8 |
+      | email                      | password |
+      | eve.holt@reqres.in         | xpto     |
+      | michael.lawson@reqres.in   | xpto     |
+      | lindsay.ferguson@reqres.in | xpto     |
 
 
   Scenario Outline: Unsuccessful Registration

@@ -51,11 +51,6 @@ class ToDOList(WebBrowser):
         locator = (By.XPATH, f'//li[text()="{task_name}"]')
         self.click_element(locator)
 
-        # take screenshot
-        #self.browser.save_screenshot(self.path + task + '_task_marked.png')
-
-        # validate task was marked
-        #assert self.validate_if_task_marked(task_name) is True, f"Task '{task_name}' not marked"
 
     def unmark_task_as_completed(self, task_name):
 
@@ -63,20 +58,8 @@ class ToDOList(WebBrowser):
         #COLOCAR TRATAMENTO DE ERRO AQUI
         self.click_element(locator)
 
-        # take screenshot
-        #self.browser.save_screenshot(self.path + task + '_task_unmarked.png')
-
-        # validate task was unmarked
-        #assert self.validate_if_task_marked(task_name) is False, f"Task '{task_name}' still marked"
 
     def delete_task(self, task_name):
 
         locator = (By.XPATH, f'//li[text()="{task_name}"]/span')
-        "COLOCAR TRATAMENTO DE ERRO AQUI"
         self.click_element(locator)
-
-        # take screenshot
-        #self.browser.save_screenshot(self.path + task + '_task_deleted.png')
-
-        # validate task was deleted
-        #assert self.validate_if_task_exist(task_name) is False, f"Task '{task_name}' not deleted"

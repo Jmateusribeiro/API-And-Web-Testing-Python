@@ -1,7 +1,8 @@
 import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
 import requests
-from utilities.settings import HOST, REGISTRATION_ENDPOINT
+from utilities.settings import HOST, REGISTRATION_ENDPOINT, CREDENTIALS_FILE
+from dotenv import dotenv_values
 
 
 scenarios('../features/registration.feature')
@@ -41,10 +42,14 @@ def assert_response_code(registration, status):
         pytest.fail(f"Status '{status}' not valid")
 
 
-@then(parsers.cfparse("the correct {token} is returned"))
-def returned_token(registration, token):
-    assert registration.json()["token"] == token, f"Token returned isn't the expected: {token}"
-    print("Token: " + registration.json()["token"])
+@then(parsers.cfparse("the correct token is returned"))
+def returned_token(registration, payload):
+
+    tokens_dict = dotenv_values(CREDENTIALS_FILE)
+    email = payload["email"]
+    expected_token = tokens_dict[email]
+    token = registration.json()["token"]
+    assert token == expected_token, f"Token returned {token} isn't the expected"
 
 
 @then(parsers.cfparse("an {error_message} is returned"))
