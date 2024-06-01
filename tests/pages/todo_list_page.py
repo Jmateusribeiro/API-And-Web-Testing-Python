@@ -3,23 +3,38 @@ from tests.pages.base_page import WebBrowser
 from selenium.webdriver.common.keys import Keys
 
 class ToDoListLocators:
-    todo_list_url = 'http://webdriveruniversity.com/To-Do-List/index.html'
-    title = 'WebDriver | To Do List'
-    input_element = (By.XPATH, '//input[@placeholder="Add new todo" and not(@style="display: none;")]')
-    tasks_list = (By.TAG_NAME, 'li')
-    plus_icon = (By.ID, 'plus-icon')
-
+    todo_list_url: str = 'http://webdriveruniversity.com/To-Do-List/index.html'
+    title: str = 'WebDriver | To Do List'
+    input_element: tuple = (By.XPATH, '//input[@placeholder="Add new todo" and not(@style="display: none;")]')
+    tasks_list: tuple = (By.TAG_NAME, 'li')
+    plus_icon: tuple = (By.ID, 'plus-icon')
 
 class ToDOList(WebBrowser):
+    """
+    Class representing the ToDoList page.
+    """
 
-    def open_page(self):
+    def open_page(self) -> None:
+        """
+        Open the ToDoList page and verify the title.
 
+        Returns:
+            None
+        """
         self.open_browser(ToDoListLocators.todo_list_url)
         assert self.driver.title == ToDoListLocators.title
 
-    def validate_if_task_exist(self, task_name):
+    def validate_if_task_exist(self, task_name: str) -> bool:
+        """
+        Validate if a task exists in the tasks list.
 
-        task_exist_flag = False
+        Args:
+            task_name (str): The name of the task to validate.
+
+        Returns:
+            bool: True if the task exists, False otherwise.
+        """
+        task_exist_flag: bool = False
         tasks_list_elements = self.find_elements(ToDoListLocators.tasks_list)
         for task in tasks_list_elements:
             if task.text != task_name:
@@ -28,38 +43,72 @@ class ToDOList(WebBrowser):
 
         return task_exist_flag
 
-    def validate_if_task_marked(self, task_name):
+    def validate_if_task_marked(self, task_name: str) -> bool:
+        """
+        Validate if a task is marked as completed.
 
+        Args:
+            task_name (str): The name of the task to validate.
+
+        Returns:
+            bool: True if the task is marked as completed, False otherwise.
+        """
         locator = (By.XPATH, f'//li[text()="{task_name}" and @class="completed"]')
         return self.check_if_element_exists(locator)
 
-    def add_new_task(self, task_name):
+    def add_new_task(self, task_name: str) -> None:
+        """
+        Add a new task to the ToDoList.
 
-        # validate in input field is visible
+        Args:
+            task_name (str): The name of the task to add.
+
+        Returns:
+            None
+        """
         if self.check_if_element_exists(ToDoListLocators.input_element) is False:
             self.click_element(ToDoListLocators.plus_icon)
 
         self.type_element(ToDoListLocators.input_element, task_name)
         self.send_keys(ToDoListLocators.input_element, Keys.ENTER)
 
-        #take screenshot
         self.take_screenshot(f'{task_name}_task_added')
 
+    def mark_task_as_completed(self, task_name: str) -> None:
+        """
+        Mark a task as completed.
 
-    def mark_task_as_completed(self, task_name):
+        Args:
+            task_name (str): The name of the task to mark as completed.
 
+        Returns:
+            None
+        """
         locator = (By.XPATH, f'//li[text()="{task_name}"]')
         self.click_element(locator)
 
+    def unmark_task_as_completed(self, task_name: str) -> None:
+        """
+        Unmark a completed task.
 
-    def unmark_task_as_completed(self, task_name):
+        Args:
+            task_name (str): The name of the task to unmark.
 
+        Returns:
+            None
+        """
         locator = (By.XPATH, f'//li[text()="{task_name}" and @class="completed"]')
-        #COLOCAR TRATAMENTO DE ERRO AQUI
         self.click_element(locator)
 
+    def delete_task(self, task_name: str) -> None:
+        """
+        Delete a task from the ToDoList.
 
-    def delete_task(self, task_name):
+        Args:
+            task_name (str): The name of the task to delete.
 
+        Returns:
+            None
+        """
         locator = (By.XPATH, f'//li[text()="{task_name}"]/span')
         self.click_element(locator)
