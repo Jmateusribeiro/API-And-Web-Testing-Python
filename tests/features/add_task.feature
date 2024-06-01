@@ -1,4 +1,3 @@
-# Created by Admin at 16/10/2022
 Feature: Add task
 
   Scenario Outline: Add New Task Successfully
