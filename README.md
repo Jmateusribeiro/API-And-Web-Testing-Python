@@ -1,5 +1,7 @@
 # API and Web Testing With Python
 
+[![Pylint](https://github.com/Jmateusribeiro/API-And-Web-Testing-Python/actions/workflows/pylint.yml/badge.svg)](https://github.com/Jmateusribeiro/API-And-Web-Testing-Python/actions/workflows/pylint.yml)
+
 Goal: Show how one can develop BDD API and Web (selenium) tests with python (pytest)
 
 
