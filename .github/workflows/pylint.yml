@@ -21,4 +21,4 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "requirements.txt not found"; fi
     - name: Analyzing the code with pylint
       run: |
-        pylint --disable=logging-fstring-interpolation,broad-exception-caught,broad-exception-raised,too-few-public-methods $(git ls-files '*.py')
+        pylint --disable=no-member,broad-exception-raised,too-few-public-methods $(git ls-files '*.py')

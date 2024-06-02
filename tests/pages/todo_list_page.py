@@ -1,11 +1,18 @@
+"""
+Module containing classes and locators for interacting with the ToDoList page.
+"""
 from selenium.webdriver.common.by import By
-from tests.pages.base_page import WebBrowser
 from selenium.webdriver.common.keys import Keys
+from tests.pages.base_page import WebBrowser
 
 class ToDoListLocators:
+    """
+    Locators for elements on the ToDoList page.
+    """
     todo_list_url: str = 'http://webdriveruniversity.com/To-Do-List/index.html'
     title: str = 'WebDriver | To Do List'
-    input_element: tuple = (By.XPATH, '//input[@placeholder="Add new todo" and not(@style="display: none;")]')
+    input_element: tuple = (By.XPATH,
+            '//input[@placeholder="Add new todo" and not(@style="display: none;")]')
     tasks_list: tuple = (By.TAG_NAME, 'li')
     plus_icon: tuple = (By.ID, 'plus-icon')
 

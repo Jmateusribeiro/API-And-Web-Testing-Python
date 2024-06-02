@@ -1,15 +1,19 @@
+"""
+steps to scenarios of registration feature
+"""
+from typing import Dict
 import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
 import requests
-from utilities.settings import HOST, REGISTRATION_ENDPOINT, CREDENTIALS_FILE
 from dotenv import dotenv_values
-from typing import Dict, Any
+from utilities.settings import HOST, REGISTRATION_ENDPOINT, CREDENTIALS_FILE, REQUESTS_TIMEOUT
 
 scenarios('../features/registration.feature')
 
 # Given Step
-@given(parsers.cfparse('email and password are definied as {email} and {password}'), target_fixture='payload')
-def payload(email: str, password: str, log: 'CustomLogger') -> Dict[str, str]:
+@given(parsers.cfparse('email and password are definied as {email} and {password}'),
+       target_fixture='payload')
+def define_payload(email: str, password: str, log: 'CustomLogger') -> Dict[str, str]:
     """
     Define payload with email and password.
 
@@ -32,7 +36,7 @@ def payload(email: str, password: str, log: 'CustomLogger') -> Dict[str, str]:
 
 # When Step
 @when("registration is executed", target_fixture='registration')
-def registration(payload: Dict[str, str]) -> requests.Response:
+def execute_registration(payload: Dict[str, str]) -> requests.Response:
     """
     Execute registration.
 
@@ -45,7 +49,9 @@ def registration(payload: Dict[str, str]) -> requests.Response:
     url = HOST + REGISTRATION_ENDPOINT
     body = payload
 
-    response = requests.post(url, data=body, verify=False)
+    response = requests.post(url, data=body,
+                             verify=False,
+                             timeout=REQUESTS_TIMEOUT)
     return response
 
 # Then Steps
@@ -81,7 +87,8 @@ def returned_token(registration: requests.Response, payload: Dict[str, str]) -> 
     assert token == expected_token, f"Token returned {token} isn't the expected"
 
 @then(parsers.cfparse("an {error_message} is returned"))
-def returned_error_message(registration: requests.Response, error_message: str, log: 'CustomLogger') -> None:
+def returned_error_message(registration: requests.Response,
+                           error_message: str, log: 'CustomLogger') -> None:
     """
     Assert an error message is returned.
 
