@@ -42,7 +42,8 @@ def get_log() -> CustomLogger:
     return CustomLogger(REPORT_DIR)
 
 @pytest.fixture(name='todo_list')
-def get_todo_list_instance(request: pytest.FixtureRequest, browser: str, log: CustomLogger) -> ToDOList:
+def get_todo_list_instance(request: pytest.FixtureRequest,
+                browser: str, log: CustomLogger) -> ToDOList:
     """
     Fixture to set up and tear down the ToDOList instance.
 

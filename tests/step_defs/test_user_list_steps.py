@@ -47,7 +47,7 @@ def step_impl(users_list: Tuple[List[dict], int], log: 'CustomLogger') -> None:
     users = users_list[0]
     nr_users = users_list[1]
 
-    error_msg = f"""Expected number of users: {nr_users}; 
+    error_msg = f"""Expected number of users: {nr_users};
     Actual number of users: {len(users)}"""
     assert len(users) == nr_users, error_msg
     log.info(f"Total number of users: {nr_users}")
