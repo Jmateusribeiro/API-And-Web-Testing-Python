@@ -1,9 +1,12 @@
+"""
+base_page module
+"""
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-from utilities.settings import SCREENSHOT_PATH
 from selenium.webdriver.chrome.options import Options
+from utilities.settings import SCREENSHOT_PATH
 
 headless_options = Options()
 headless_options.add_argument("--headless")
@@ -13,7 +16,8 @@ class WebBrowser:
     Class representing a web browser instance.
     """
 
-    def __init__(self, browser: str, implicit_wait: int = 3, screenshot_path: str = SCREENSHOT_PATH):
+    def __init__(self, browser: str, implicit_wait: int = 3,
+                 screenshot_path: str = SCREENSHOT_PATH):
         """
         Initialize the WebBrowser instance.
 
@@ -38,16 +42,16 @@ class WebBrowser:
         """
         if browser == 'Chrome':
             return webdriver.Chrome()
-        elif browser == 'Edge':
+        if browser == 'Edge':
             return webdriver.Edge()
-        elif browser == 'Headless Chrome':
+        if browser == 'Headless Chrome':
             return webdriver.Chrome(options=headless_options)
-        elif browser == 'Opera':
+        if browser == 'Opera':
             options = Options()
             options.add_experimental_option("w3c", True)
             return webdriver.Opera(options=options)
-        else:
-            raise Exception(f'Browser "{browser}" is not supported')
+
+        raise Exception(f'Browser "{browser}" is not supported')
 
     def open_browser(self, url: str) -> None:
         """
@@ -81,7 +85,8 @@ class WebBrowser:
         Returns:
             web element: The web element.
         """
-        return WebDriverWait(self.driver, self.implicit_wait).until(EC.visibility_of_element_located(by_locator))
+        return WebDriverWait(self.driver,
+                self.implicit_wait).until(EC.visibility_of_element_located(by_locator))
 
     def get_element_text(self, by_locator: tuple) -> str:
         """

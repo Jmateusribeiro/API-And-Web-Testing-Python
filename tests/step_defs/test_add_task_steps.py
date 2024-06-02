@@ -1,4 +1,6 @@
-from typing import Any
+"""
+steps to scenarios of user_list feature
+"""
 from pytest_bdd import scenarios, given, when, then, parsers
 import pytest
 

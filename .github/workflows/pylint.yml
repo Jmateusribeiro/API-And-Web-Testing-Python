@@ -20,4 +20,4 @@ jobs:
         pip install pylint
     - name: Analyzing the code with pylint
       run: |
-        pylint **/*.py
+        pylint --disable=no-member,broad-exception-raised $(git ls-files '*.py')

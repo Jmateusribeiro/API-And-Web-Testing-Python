@@ -1,3 +1,6 @@
+"""
+conftest module
+"""
 import pytest
 from tests.pages.todo_list_page import ToDOList
 from utilities.settings import SUPPORTED_BROWSERS, REPORT_DIR
@@ -10,10 +13,13 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     Args:
         parser (pytest.Parser): The pytest parser object.
     """
-    parser.addoption("--Browser", action="store", default="Headless Chrome", help="browser to run the test")
+    parser.addoption("--Browser",
+                     action="store",
+                     default="Headless Chrome",
+                     help="browser to run the test")
 
-@pytest.fixture()
-def browser(request: pytest.FixtureRequest) -> str:
+@pytest.fixture(name='browser')
+def get_browser(request: pytest.FixtureRequest) -> str:
     """
     Fixture to retrieve the selected browser from the command-line option.
 
@@ -25,8 +31,8 @@ def browser(request: pytest.FixtureRequest) -> str:
     """
     return request.config.getoption('--Browser')
 
-@pytest.fixture(scope='module')
-def log() -> CustomLogger:
+@pytest.fixture(scope='module', name='log')
+def get_log() -> CustomLogger:
     """
     Fixture to create a CustomLogger instance.
 
@@ -35,8 +41,8 @@ def log() -> CustomLogger:
     """
     return CustomLogger(REPORT_DIR)
 
-@pytest.fixture()
-def todo_list(request: pytest.FixtureRequest, browser: str, log: CustomLogger) -> ToDOList:
+@pytest.fixture(name='todo_list')
+def get_todo_list_instance(request: pytest.FixtureRequest, browser: str, log: CustomLogger) -> ToDOList:
     """
     Fixture to set up and tear down the ToDOList instance.
 
@@ -50,7 +56,8 @@ def todo_list(request: pytest.FixtureRequest, browser: str, log: CustomLogger) -
     """
     log.info(f"browser selected: {browser}")
     if browser not in SUPPORTED_BROWSERS:
-        raise Exception(f"Browser '{browser}' not supported; supported Browsers: {SUPPORTED_BROWSERS}")
+        raise Exception(f"""Browser '{browser}' not supported;
+                        supported Browsers: {SUPPORTED_BROWSERS}""")
 
     # Setup code
     todo_list = ToDOList(browser=browser)
